@@ -27,8 +27,8 @@ const sessionOptions = {
 if (process.env.NODE_ENV !== "development") {
     sessionOptions.proxy = true;
     sessionOptions.cookie = {
-        sameSite: "lax", //was none
-        secure: false, //was true
+        sameSite: "none", //was lax
+        secure: true, //was false
         domain: process.env.NODE_SERVER_DOMAIN,
     };
 }
