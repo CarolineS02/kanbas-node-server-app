@@ -16,7 +16,7 @@ const app = express();
 app.use(
     cors({
         credentials: true,
-        origin: "https://a5--mellifluous-marigold-e75182.netlify.app" || "http://localhost:3000",
+        origin: process.env.NETLIFY_URL || "http://localhost:3000",
     })
 );
 const sessionOptions = {
@@ -27,8 +27,8 @@ const sessionOptions = {
 if (process.env.NODE_ENV !== "development") {
     sessionOptions.proxy = true;
     sessionOptions.cookie = {
-        sameSite: "lax", //was lax
-        secure: false, //was false
+        sameSite: "none", //was lax
+        secure: true, //was false
         domain: process.env.NODE_SERVER_DOMAIN,
     };
 }
