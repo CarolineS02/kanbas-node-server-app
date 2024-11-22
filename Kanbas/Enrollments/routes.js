@@ -1,15 +1,15 @@
 import * as enrollmentsDao from "./dao.js";
 
 export default function enrollUserInCourse(app) {
-    app.post("/api/enrollments/:userId/:courseId", (req, res) => {
+    app.post("/api/enrollments/:userId/:courseId", async (req, res) => {
         const { userId, courseId } = req.params;
-        const enrollments = enrollmentsDao.enrollUserInCourse(userId, courseId);
+        const enrollments = await enrollmentsDao.enrollUserInCourse(userId, courseId);
         res.json(enrollments);
     });
 
-    app.delete("/api/enrollments/:userId/:courseId", (req, res) => {
+    app.delete("/api/enrollments/:userId/:courseId", async (req, res) => {
         const { userId, courseId } = req.params;
-        const enrollments = enrollmentsDao.unenrollUserInCourse(userId, courseId);
+        const enrollments = await enrollmentsDao.unenrollUserInCourse(userId, courseId);
         res.json(enrollments);
     });
 

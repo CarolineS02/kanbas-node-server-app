@@ -10,14 +10,20 @@ import session from "express-session";
 import "dotenv/config";
 import AssignmentRoutes from './Kanbas/Assignments/routes.js';
 import QuizRoutes from "./Kanbas/Quizzes/routes.js"
+import mongoose from "mongoose";
+import "dotenv/config";
+import QuestionsRoute from './Kanbas/QuizQuestions/routes.js';
 
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || 
+"mongodb+srv://southardsmithc:8zDrksHQlU9yx39v@db-cs4530-f24-109.zwh8f.mongodb.net/kanbas"
+mongoose.connect(CONNECTION_STRING);
 
 const app = express();
 app.use(
     cors({
         credentials: true,
-        origin: process.env.NETLIFY_URL || "http://localhost:3000",
-        // origin: "http://localhost:3000",
+        // origin: process.env.NETLIFY_URL || "http://localhost:3000",
+        origin: "http://localhost:3000",
     })
 );
 const sessionOptions = {
@@ -28,8 +34,8 @@ const sessionOptions = {
 if (process.env.NODE_ENV !== "development") {
     sessionOptions.proxy = true;
     sessionOptions.cookie = {
-        sameSite: "none", //was lax -none
-        secure: true, //was false -true
+        sameSite: "lax", //was lax -none
+        secure: false, //was false -true
         domain: process.env.NODE_SERVER_DOMAIN,
     };
 }
@@ -41,6 +47,7 @@ AssignmentRoutes(app);
 EnrollmentRoutes(app);
 ModuleRoutes(app);
 QuizRoutes(app);
+QuestionsRoute(app);
 Lab5(app);
 Hello(app)
 app.listen(process.env.PORT || 4000);
