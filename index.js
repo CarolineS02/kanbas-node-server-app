@@ -14,16 +14,15 @@ import mongoose from "mongoose";
 import "dotenv/config";
 import QuestionsRoute from './Kanbas/QuizQuestions/routes.js';
 
-const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || 
-"mongodb+srv://southardsmithc:8zDrksHQlU9yx39v@db-cs4530-f24-109.zwh8f.mongodb.net/kanbas"
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
 mongoose.connect(CONNECTION_STRING);
 
 const app = express();
 app.use(
     cors({
         credentials: true,
-        // origin: process.env.NETLIFY_URL || "http://localhost:3000",
-        origin: "http://localhost:3000",
+        origin: process.env.NETLIFY_URL || "http://localhost:3000",
+        // origin: "http://localhost:3000",
     })
 );
 const sessionOptions = {
@@ -34,8 +33,8 @@ const sessionOptions = {
 if (process.env.NODE_ENV !== "development") {
     sessionOptions.proxy = true;
     sessionOptions.cookie = {
-        sameSite: "lax", //was lax -none
-        secure: false, //was false -true
+        sameSite: "none", //was lax -none
+        secure: true, //was false -true
         domain: process.env.NODE_SERVER_DOMAIN,
     };
 }
