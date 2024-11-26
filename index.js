@@ -16,7 +16,7 @@ import QuestionsRoute from './Kanbas/QuizQuestions/routes.js';
 
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
 mongoose.connect(CONNECTION_STRING);
-console.log('NETLIFY_URL:', process.env.NODE_SERVER_DOMAIN);
+console.log('NODE_SERVER_DOMAIN:', process.env.NODE_SERVER_DOMAIN);
 
 const app = express();
 app.use(
@@ -41,6 +41,13 @@ if (process.env.NODE_ENV !== "development") {
 }
 app.use(session(sessionOptions));
 app.use(express.json());
+app.use((req, res, next) => {
+    req.session.save((err) => {
+        if (err) console.error('Session save error:', err);
+        else console.log('Session saved successfully:', req.session);
+    });
+    next();
+});
 UserRoutes(app);
 CourseRoutes(app);
 AssignmentRoutes(app);
