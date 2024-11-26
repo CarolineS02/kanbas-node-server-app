@@ -36,7 +36,7 @@ if (process.env.NODE_ENV !== "development") {
     sessionOptions.cookie = {
         sameSite: "none", //was lax -none
         secure: true, //was false -true
-        domain: process.env.NODE_SERVER_DOMAIN,
+        // domain: process.env.NODE_SERVER_DOMAIN,
     };
 }
 app.use(session(sessionOptions));
