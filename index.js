@@ -16,7 +16,7 @@ import QuestionsRoute from './Kanbas/QuizQuestions/routes.js';
 
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
 mongoose.connect(CONNECTION_STRING);
-console.log('NETLIFY_URL:', process.env.NETLIFY_URL);
+console.log('NETLIFY_URL:', process.env.NODE_SERVER_DOMAIN);
 
 const app = express();
 app.use(
