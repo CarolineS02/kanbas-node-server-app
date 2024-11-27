@@ -15,7 +15,6 @@ import "dotenv/config";
 import QuestionsRoute from './Kanbas/QuizQuestions/routes.js';
 
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
-// const CONNECTION_STRING = "mongodb+srv://southardsmithc:8zDrksHQlU9yx39v@db-cs4530-f24-109.zwh8f.mongodb.net/kanbas"
 mongoose.connect(CONNECTION_STRING);
 
 const app = express();
