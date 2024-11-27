@@ -15,8 +15,8 @@ import "dotenv/config";
 import QuestionsRoute from './Kanbas/QuizQuestions/routes.js';
 
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
+// const CONNECTION_STRING = "mongodb+srv://southardsmithc:8zDrksHQlU9yx39v@db-cs4530-f24-109.zwh8f.mongodb.net/kanbas"
 mongoose.connect(CONNECTION_STRING);
-console.log('NODE_SERVER_DOMAIN:', process.env.NODE_SERVER_DOMAIN);
 
 const app = express();
 app.use(
@@ -41,13 +41,14 @@ if (process.env.NODE_ENV !== "development") {
 }
 app.use(session(sessionOptions));
 app.use(express.json());
-app.use((req, res, next) => {
-    req.session.save((err) => {
-        if (err) console.error('Session save error:', err);
-        else console.log('Session saved successfully:', req.session);
-    });
-    next();
-});
+// Code to test and display session variables for Render:
+// app.use((req, res, next) => {
+//     req.session.save((err) => {
+//         if (err) console.error('Session save error:', err);
+//         else console.log('Session saved successfully:', req.session);
+//     });
+//     next();
+// });
 UserRoutes(app);
 CourseRoutes(app);
 AssignmentRoutes(app);
