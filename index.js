@@ -13,9 +13,17 @@ import QuizRoutes from "./Kanbas/Quizzes/routes.js"
 import mongoose from "mongoose";
 import "dotenv/config";
 import QuestionsRoute from './Kanbas/QuizQuestions/routes.js';
-
+import AnswersRoutes from './Kanbas/QuizAnswers/routes.js';
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
 mongoose.connect(CONNECTION_STRING);
+
+// mongoose.connection.on('connected', () => {
+//     console.log('Connected to MongoDB');
+// });
+
+// mongoose.connection.on('error', (error) => {
+//     console.error('MongoDB connection error:', error);
+// });
 
 const app = express();
 app.use(
@@ -49,6 +57,7 @@ app.use(express.json());
 //     next();
 // });
 UserRoutes(app);
+AnswersRoutes(app);
 CourseRoutes(app);
 AssignmentRoutes(app);
 EnrollmentRoutes(app);
