@@ -16,13 +16,8 @@ export default function QuestionsRoute(app) {
         res.sendStatus(204);
     });
 
-    app.post("/api/answers/:quizId", async (req, res) => {
-        const { quizId, userId } = req.params;
-        const answer = {
-            ...req.body,
-            quiz: quizId,
-            user: userId,
-        };
+    app.post("/api/answers", async (req, res) => { // TODO
+        const answer = req.body;
         const newAnswer = await answersDao.createAnswer(answer);
         res.send(newAnswer);
     });
@@ -37,9 +32,9 @@ export default function QuestionsRoute(app) {
         res.send(newAnswer);
     });
 
-    app.get("/api/quizzes/:quizId/answers", async (req, res) => {
-        const { quizId } = req.params;
-        const answers = await answersDao.findAnswersForQuiz(quizId);
+    app.get("/api/answers/:quizId/:userId/:attempt", async (req, res) => {
+        const { quizId, userId, attempt } = req.params;
+        const answers = await answersDao.findAnswersForQuiz(quizId, userId, attempt);
         res.json(answers);
     });
 
