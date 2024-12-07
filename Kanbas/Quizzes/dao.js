@@ -32,6 +32,9 @@ export function updateQuiz(quizId, quizUpdates) {
   // Object.assign(quiz, quizUpdates);
   // return quiz;
   return model.findByIdAndUpdate({ _id: quizId }, quizUpdates, { new: true });
+}
 
+export function findQuizById(quizId) {
+  return model.findOne({ _id: quizId });
 }
 

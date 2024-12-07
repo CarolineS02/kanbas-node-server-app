@@ -16,6 +16,17 @@ export default function QuestionsRoute(app) {
         res.sendStatus(204);
     });
 
+    app.post("/api/answers/:quizId", async (req, res) => {
+        const { quizId, userId } = req.params;
+        const answer = {
+            ...req.body,
+            quiz: quizId,
+            user: userId,
+        };
+        const newAnswer = await answersDao.createAnswer(answer);
+        res.send(newAnswer);
+    });
+
     app.post("/api/quizzes/:quizId/answers", async (req, res) => {
         const { quizId } = req.params;
         const answer = {

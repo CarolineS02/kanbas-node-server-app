@@ -29,8 +29,8 @@ const app = express();
 app.use(
     cors({
         credentials: true,
-        origin: process.env.NETLIFY_URL || "http://localhost:3000",
-        // origin: "http://localhost:3000",
+        // origin: process.env.NETLIFY_URL || "http://localhost:3000",
+        origin: "http://localhost:3000",
     })
 );
 const sessionOptions = {
@@ -41,8 +41,8 @@ const sessionOptions = {
 if (process.env.NODE_ENV !== "development") {
     sessionOptions.proxy = true;
     sessionOptions.cookie = {
-        sameSite: "none", //was lax -none
-        secure: true, //was false -true
+        sameSite: "lax", //was lax -none
+        secure: false, //was false -true
         // domain: process.env.NODE_SERVER_DOMAIN,
     };
 }
