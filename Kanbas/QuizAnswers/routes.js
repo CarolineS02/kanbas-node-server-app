@@ -31,12 +31,6 @@ export default function QuestionsRoute(app) {
     res.send(ans);
   });
 
-  app.put("/api/answers", async (req, res) => {
-    const answer = req.body;
-    const newAnswer = await answersDao.createAnswer(answer);
-    res.send(newAnswer);
-  });
-
   app.post("/api/quizzes/:quizId/answers", async (req, res) => {
     const { quizId } = req.params;
     const answer = {
