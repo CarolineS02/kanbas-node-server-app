@@ -41,6 +41,12 @@ export default function QuestionsRoute(app) {
     res.send(newAnswer);
   });
 
+  app.get("/api/answers/:quizId/:userId", async (req, res) => {
+    const { quizId, userId } = req.params;
+    const answers = await answersDao.findLatestAnswersForQuiz(quizId, userId);
+    res.json(answers);
+  });
+
   app.get("/api/answers/:quizId/:userId/:attempt", async (req, res) => {
     const { quizId, userId, attempt } = req.params;
     const answers = await answersDao.findAnswersForQuiz(

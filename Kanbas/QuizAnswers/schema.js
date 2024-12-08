@@ -11,6 +11,7 @@ const schema = new mongoose.Schema(
     answer: [String],
     correct: Boolean,
     time_started: Date,
+    sequence: Number,
   },
   { collection: "answers" }
 );

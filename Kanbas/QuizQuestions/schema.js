@@ -12,6 +12,7 @@ const schema = new mongoose.Schema(
     },
     choices: [String],
     answers: [String],
+    sequence: Number,
   },
   { collection: "questions" }
 );
