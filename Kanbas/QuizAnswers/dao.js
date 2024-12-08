@@ -8,6 +8,10 @@ export function findAnswersForQuiz(quizId, userId, attempt) {
   return model.find({ quiz: quizId, user: userId, attempt: attempt });
 }
 
+export function findAnswerById(answerId) {
+  return model.find({ _id: answerId });
+}
+
 export function createAnswer(answer) {
   delete answer._id
   return model.create(answer);
